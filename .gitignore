@@ -1,6 +1,6 @@
 *~
 *.py?
-my-app.ini
-uwsgi.ini
+/my-app.ini
+/uwsgi.ini
 __pycache__
 
