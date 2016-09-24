@@ -1,0 +1,14 @@
+six
+pytz
+bottle
+python-memcached
+redis
+jinja2
+requests
+#requests[security]
+#pyopenssl
+#ndg-httpsclient
+#pyasn1
+
+#pylru
+

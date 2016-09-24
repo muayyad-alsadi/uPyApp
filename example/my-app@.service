@@ -1,0 +1,22 @@
+[Unit]
+Description=MyApp based on uPyApp service on port %I
+After=network.target 
+Requires=network.target 
+
+[Service]
+User=my-app
+Group=my-app
+Type=notify
+NotifyAccess=all
+LimitNOFILE=infinity
+CPUAccounting=True
+BlockIOAccounting=True
+MemoryAccounting=True
+Restart=always
+KillSignal=SIGQUIT
+ExecStart=/bin/bash -l -c "cd ~/my-app/ && exec uwsgi --plugin systemd_logger --logger systemd -s 127.0.0.1:%i --touch-reload reload.%i.txt ./uwsgi.ini "
+ExecReload=/bin/bash -l -c "touch ~/my-app/reload.%i.txt"
+
+[Install]
+WantedBy=multi-user.target
+
