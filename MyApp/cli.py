@@ -18,7 +18,7 @@ def help(command=None):
     print("%s: command line interface" % script)
     print("usage: %s COMMAND OPTIONS" % script)
     print("="*40)
-    print()
+    print("")
     index()
 
 def help_one(name, func=None, complete=False):
