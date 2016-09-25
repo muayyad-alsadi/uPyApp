@@ -34,18 +34,28 @@ def plugin_test(myarg="default"):
 
 
 @command
-def serve(port=8080, host='127.0.0.1', debug=None, server='cherrypy'):
+def serve(port=8080, host='127.0.0.1', debug=None, server='flask'):
     """
     run web server
     
-    server=wsgiref,cherrypy,paste
+    server=flask,paste
     debug='0' or '1' defaults to 1 if log-level==debug
+    see:
+    * http://flask.pocoo.org/docs/0.11/api/#flask.Flask.run
+    * http://werkzeug.pocoo.org/docs/0.11/serving/
     """
-    from .web import run, app
+    from .web import app
     if debug==None:
         debug= app_config.is_debug
     else:
         debug=True if debug=='1' else False
     if debug:
         logging.basicConfig(level=logging.DEBUG)
-    run(app, server=server, host=host, port=port, reloader=debug, debug=debug)
+    if server=='flask':
+        app.run(host=host, port=port, debug=debug, use_reloader=debug)
+    else:
+        # see http://pythonpaste.org/modules/httpserver.html#paste.httpserver.serve
+        from paste.httpserver import serve
+        if debug: logger.warning("no auto reload in paste")
+        serve(app, host=host, port=port)
+

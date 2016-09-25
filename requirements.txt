@@ -1,6 +1,6 @@
 six
 pytz
-bottle
+flask
 python-memcached
 redis
 jinja2

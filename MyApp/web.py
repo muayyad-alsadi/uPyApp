@@ -6,21 +6,26 @@ import logging
 try: import simplejson as json
 except ImportError: import json
 
-from bottle import Bottle, request, run, response
+from flask import Flask
 
 from .common import *
 
 logger = logging.getLogger(__name__)
 
-application = app = Bottle()
+application = app = Flask(__name__)
 
 
-@app.get('/ping')
+@app.route('/ping')
 def ping():
     return 'pong@'+str(time.time())
 
 def main():
-    run(app, host='localhost', port=8800,  debug=True)
+    """
+    see:
+    * http://flask.pocoo.org/docs/0.11/api/#flask.Flask.run
+    * http://werkzeug.pocoo.org/docs/0.11/serving/
+    """
+    app.run(host='0.0.0.0', port=8080, debug=app_config.is_debug, use_reloader=app_config.is_debug)
 
 if __name__ == '__main__':
     main()
