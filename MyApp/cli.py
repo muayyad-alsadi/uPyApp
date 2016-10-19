@@ -32,7 +32,7 @@ def help_one(name, func=None, complete=False):
         print("\t\t%s" % firstline(func.__doc__))
     
 def index():
-    for name, func in commands.iteritems():
+    for name, func in commands.items():
         help_one(name, func)
 
 
