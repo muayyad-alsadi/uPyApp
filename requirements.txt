@@ -5,6 +5,7 @@ python-memcached
 redis
 jinja2
 requests
+pytonik
 #requests[security]
 #pyopenssl
 #ndg-httpsclient
